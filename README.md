@@ -1,4 +1,4 @@
-# 🔐 password-tool
+# 🔐 SecureHash-Lab
 
 Учебный CLI-инструмент на Python для работы с паролями.
 
