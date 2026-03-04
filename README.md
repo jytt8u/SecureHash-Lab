@@ -20,9 +20,7 @@
 ## Установка
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/password-tool.git
-cd password-tool
-pip install -r requirements.txt
+Bash
 ```
 
 ---
