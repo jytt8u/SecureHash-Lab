@@ -1,27 +1,16 @@
-#!/usr/bin/env python3
-"""
-Интерактивное меню для password-tool.
-Запуск: py menu.py
-"""
-
 import os
 import sys
 import time
 
-# Подключаем основной модуль
+
 from password_tool import (
     hash_sha, hash_bcrypt, verify_sha, verify_bcrypt,
     assess_strength, print_strength, dictionary_attack,
     generate_salt, BCRYPT_AVAILABLE
 )
 
-# ─────────────────────────── цвета ──────────────────────────────
-
 def cls():
     os.system("cls" if os.name == "nt" else "clear")
-
-# ─────────────────────────── шапка ──────────────────────────────
-
 BANNER = r"""
   ____                            _   _   _           _
  / ___|  ___  ___ _   _ _ __ ___| | | | | | __ _ ___| |__
@@ -36,7 +25,7 @@ def print_banner():
     print(BANNER)
     print("  " + "─" * 54)
 
-# ──────────────────────────── меню ──────────────────────────────
+
 
 MENU = """
   [1]  Хешировать пароль
@@ -72,7 +61,7 @@ def choose_algorithm() -> str:
     mapping = {"1": "sha256", "2": "sha512", "3": "bcrypt", "": "sha256"}
     return mapping.get(choice, "sha256")
 
-# ──────────────────────── пункты меню ───────────────────────────
+
 
 def menu_hash():
     cls()
@@ -86,7 +75,7 @@ def menu_hash():
         pause()
         return
 
-    # Сначала показываем надёжность
+
     print("\n  Анализ надёжности вашего пароля:")
     result = assess_strength(password)
     print_strength(result)
@@ -167,7 +156,7 @@ def menu_strength():
     result = assess_strength(password)
     print_strength(result)
 
-    # Подсказка — пример хорошего пароля
+
     if result["score"] < 6:
         print("  💡 Пример сильного пароля: Tr0ub4dor&3xZ!")
         print("     (не используйте именно этот — он уже известен)\n")
@@ -204,7 +193,7 @@ def menu_attack():
     pause()
 
 
-# ──────────────────────── главный цикл ──────────────────────────
+
 
 def main():
     while True:

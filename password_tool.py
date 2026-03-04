@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""
-password-tool — учебный CLI-инструмент для работы с паролями.
 
-Возможности:
-  hash      — хешировать пароль (SHA-256, SHA-512, bcrypt)
-  verify    — проверить пароль по хешу
-  strength  — оценить надёжность пароля
-  attack    — демонстрация атаки по словарю (только учебные цели)
-"""
 
 import argparse
 import hashlib
@@ -25,23 +17,19 @@ try:
 except ImportError:
     BCRYPT_AVAILABLE = False
 
-
-# ─────────────────────────── утилиты ────────────────────────────
-
 def generate_salt(length: int = 16) -> str:
-    """Генерирует случайную соль в hex-формате."""
+    
     return os.urandom(length).hex()
 
 
 def hash_sha(password: str, salt: str, algorithm: str) -> str:
-    """SHA-256 / SHA-512 с солью."""
     salted = (salt + password).encode("utf-8")
     h = hashlib.new(algorithm, salted)
     return h.hexdigest()
 
 
 def hash_bcrypt(password: str, rounds: int = 12) -> str:
-    """bcrypt (соль встроена в хеш)."""
+    
     if not BCRYPT_AVAILABLE:
         sys.exit("❌ Установите bcrypt: pip install bcrypt")
     hashed = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt(rounds=rounds))
@@ -59,7 +47,7 @@ def verify_bcrypt(password: str, stored_hash: str) -> bool:
     return bcrypt.checkpw(password.encode("utf-8"), stored_hash.encode("utf-8"))
 
 
-# ─────────────────────── оценка надёжности ──────────────────────
+
 
 def assess_strength(password: str) -> dict:
     score = 0
@@ -91,7 +79,7 @@ def assess_strength(password: str) -> dict:
             issues.append(f"Нет: {label}")
             tips.append(f"Добавьте {label}")
 
-    # Частые паттерны
+    
     common_patterns = [
         (r"(.)\1{2,}", "повторяющиеся символы"),
         (r"(012|123|234|345|456|567|678|789|890|abc|bcd|cde|def|efg|fgh|ghi|hij|ijk|jkl|klm|lmn|mno|nop|opq|pqr|qrs|rst|stu|tuv|uvw|vwx|wxy|xyz)", "последовательности"),
@@ -116,7 +104,7 @@ def assess_strength(password: str) -> dict:
     else:
         level, color = "Очень сильный 💪", "ОТЛИЧНЫЙ"
 
-    # Грубая оценка энтропии
+    
     charset = 0
     if re.search(r"[a-z]", password): charset += 26
     if re.search(r"[A-Z]", password): charset += 26
@@ -153,7 +141,7 @@ def print_strength(result: dict):
     print(f"{'─'*40}\n")
 
 
-# ─────────────────────── атака по словарю ───────────────────────
+
 
 DISCLAIMER = """
 ╔══════════════════════════════════════════════════════════════╗
@@ -215,7 +203,7 @@ def dictionary_attack(stored_hash: str, salt: str, algorithm: str, wordlist_path
         print("  ✅ Это хороший знак — пароль не является тривиальным.\n")
 
 
-# ──────────────────────────── CLI ───────────────────────────────
+
 
 def cmd_hash(args):
     algorithm = args.algorithm
