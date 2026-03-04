@@ -33,7 +33,6 @@ MENU = """
   [3]  Оценить надёжность пароля
   [4]  Атака по словарю (учебная)
   [0]  Выход
-
 """
 
 def print_menu():
@@ -42,7 +41,6 @@ def print_menu():
     print(MENU)
 
 def ask(prompt: str, secret: bool = False) -> str:
-    """Ввод с подсказкой. secret=True скрывает ввод (для паролей)."""
     if secret:
         import getpass
         return getpass.getpass(f"  {prompt}: ")
@@ -134,9 +132,9 @@ def menu_verify():
         ok = verify_sha(password, salt, stored_hash, algorithm)
 
     if ok:
-        print("\n  ✅  Пароль ВЕРНЫЙ!\n")
+        print("\n  Пароль ВЕРНЫЙ!\n")
     else:
-        print("\n  ❌  Пароль НЕВЕРНЫЙ.\n")
+        print("\n   Пароль НЕВЕРНЫЙ.\n")
 
     pause()
 
@@ -158,8 +156,8 @@ def menu_strength():
 
 
     if result["score"] < 6:
-        print("  💡 Пример сильного пароля: Tr0ub4dor&3xZ!")
-        print("     (не используйте именно этот — он уже известен)\n")
+        print("   Пример сильного пароля: Tr0ub4dor&3xZ!")
+        print("    (не используйте именно этот — он уже известен)\n")
 
     pause()
 
