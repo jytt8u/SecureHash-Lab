@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 
 
 import argparse
@@ -10,7 +10,7 @@ import sys
 import time
 from pathlib import Path
 
-# bcrypt — опциональная зависимость
+
 try:
     import bcrypt
     BCRYPT_AVAILABLE = True
