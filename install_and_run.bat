@@ -8,7 +8,6 @@ echo  ║     Установка SecureHash-Lab         ║
 echo  ╚══════════════════════════════════════╝
 echo.
 
-:: Проверяем Python
 echo  [1/3] Проверка Python...
 py --version >nul 2>&1
 if errorlevel 1 (
@@ -26,13 +25,11 @@ if errorlevel 1 (
 for /f "tokens=*" %%i in ('py --version') do set PYVER=%%i
 echo  ✅ Найден %PYVER%
 
-:: Обновляем pip
 echo.
 echo  [2/3] Обновление pip...
 py -m pip install --upgrade pip --quiet
 echo  ✅ pip обновлён
 
-:: Устанавливаем зависимости
 echo.
 echo  [3/3] Установка зависимостей...
 py -m pip install bcrypt --quiet
