@@ -5,6 +5,8 @@
 > ⚠️ **Только для образовательных целей.** Не используйте функцию атаки против систем без разрешения.
 
 ---
+## Быстрый старт
+Скачай проект и запусти install_and_run.bat
 
 ## Возможности
 
@@ -20,9 +22,7 @@
 ## Установка
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/password-tool.git
-cd password-tool
-pip install -r requirements.txt
+Bash
 ```
 
 ---
